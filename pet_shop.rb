@@ -7,7 +7,7 @@ def total_cash(name)
 end
 
 def add_or_remove_cash(name, number)
-  return name[:admin][:total_cash] = name[:admin][:total_cash] + number
+  return name[:admin][:total_cash] += number
 end
 
 def pets_sold(pets)
@@ -15,5 +15,10 @@ def pets_sold(pets)
 end
 
 def increase_pets_sold(name, pets)
-  return name[:admin][:pets_sold] = name[:admin][:pets_sold] + pets
+  return name[:admin][:pets_sold] += pets
+end
+
+def stock_count(name)
+  number_of_pets = name[:pets].length
+  return number_of_pets
 end
