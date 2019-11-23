@@ -78,8 +78,6 @@ end
 def sell_pet_to_customer (shop_name, whole_pet, customer)
 
 
-  
-
   if whole_pet == nil
     return nil
   else
@@ -88,17 +86,8 @@ def sell_pet_to_customer (shop_name, whole_pet, customer)
       shop_name[:admin][:total_cash] += whole_pet[:price]
       customer[:pets].push(1)
       shop_name[:pets].delete(whole_pet)
-      shop_name[:admin][:pets_sold] += 1\
+      shop_name[:admin][:pets_sold] += 1
     end
   end
-
-
-
-
-
-
-
-  #end
-
 
 end
