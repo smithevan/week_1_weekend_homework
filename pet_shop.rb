@@ -35,8 +35,8 @@ def pets_by_breed(names, breed)
 end
 
 def find_pet_by_name(shop_name, pet_name)
-  for name in shop_name[:pets]
-    return name if name[:name] == pet_name
+  for whole_pet in shop_name[:pets]
+    return whole_pet if whole_pet[:name] == pet_name
   end
   return nil
 end
@@ -76,9 +76,29 @@ def customer_can_afford_pet(customer, new_pet)
 end
 
 def sell_pet_to_customer (shop_name, whole_pet, customer)
-  customer[:cash] -= whole_pet[:price]
-  shop_name[:pets].delete(whole_pet)
-  shop_name[:admin][:total_cash] += whole_pet[:price]
-  shop_name[:admin][:pets_sold] += 1
-  customer[:pets].push(1)
+
+
+  
+
+  if whole_pet == nil
+    return nil
+  else
+    if customer[:cash] >= whole_pet[:price]
+      customer[:cash] -= whole_pet[:price]
+      shop_name[:admin][:total_cash] += whole_pet[:price]
+      customer[:pets].push(1)
+      shop_name[:pets].delete(whole_pet)
+      shop_name[:admin][:pets_sold] += 1\
+    end
+  end
+
+
+
+
+
+
+
+  #end
+
+
 end
