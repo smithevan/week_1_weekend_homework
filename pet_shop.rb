@@ -1,32 +1,31 @@
-def pet_shop_name(name)
-  return name[:name]
+def pet_shop_name(shop_name)
+  return shop_name[:name]
 end
 
-def total_cash(name)
-  return name[:admin][:total_cash]
+def total_cash(shop_name)
+  return shop_name[:admin][:total_cash]
 end
 
-def add_or_remove_cash(name, number)
-  return name[:admin][:total_cash] += number
+def add_or_remove_cash(shop_name, cash_being_added_or_removed)
+  return shop_name[:admin][:total_cash] += cash_being_added_or_removed
 end
 
-def pets_sold(pets)
-  return pets[:admin][:pets_sold]
+def pets_sold(shop_name)
+  return shop_name[:admin][:pets_sold]
 end
 
-def increase_pets_sold(name, pets)
-  return name[:admin][:pets_sold] += pets
+def increase_pets_sold(shop_name, pets)
+  return shop_name[:admin][:pets_sold] += pets
 end
 
-def stock_count(name)
-  number_of_pets = name[:pets].length
-  return number_of_pets
+def stock_count(pet_name)
+  return pet_name[:pets].length
 end
 
-def pets_by_breed(names, breed)
+def pets_by_breed(petshop, search_breed)
   pets_of_particuar_breed = []
-  for name in names[:pets]
-    pets_of_particuar_breed.push(name) if name[:breed] == breed
+  for individual_pet in petshop[:pets]
+    pets_of_particuar_breed.push(individual_pet) if individual_pet[:breed] == search_breed
   end
   return pets_of_particuar_breed
 end
@@ -48,8 +47,8 @@ def add_pet_to_stock(shop_name, new_pet)
   shop_name[:pets].push(new_pet)
 end
 
-def customer_cash(customers)
-  return customers[:cash]
+def customer_cash(customer)
+  return customer[:cash]
 end
 
 def remove_customer_cash(customer, cash)
@@ -78,13 +77,14 @@ def sell_pet_to_customer (shop_name, whole_pet, customer)
     return nil
   else
     #check customer has cash
-    if customer[:cash] >= whole_pet[:price]
+    if customer_can_afford_pet(customer, whole_pet)
     #subtract price of pet from customer's cash
+      #remove_cutomer_cash(customer, whole_pet)
       customer[:cash] -= whole_pet[:price]
     #increase total cash amount for shop to reflect sale
       shop_name[:admin][:total_cash] += whole_pet[:price]
     #add pet to customer's tally
-      customer[:pets].push(whole_pet[:name])
+      add_pet_to_customer(customer, whole_pet)
     #delete pet from shop
       shop_name[:pets].delete(whole_pet)
     #update number of pets sold
