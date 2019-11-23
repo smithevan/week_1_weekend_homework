@@ -79,14 +79,13 @@ def sell_pet_to_customer (shop_name, whole_pet, customer)
     #check customer has cash
     if customer_can_afford_pet(customer, whole_pet)
     #subtract price of pet from customer's cash
-      #remove_cutomer_cash(customer, whole_pet)
-      customer[:cash] -= whole_pet[:price]
+      remove_customer_cash(customer, whole_pet[:price])
     #increase total cash amount for shop to reflect sale
-      shop_name[:admin][:total_cash] += whole_pet[:price]
+      add_or_remove_cash(shop_name, whole_pet[:price])
     #add pet to customer's tally
       add_pet_to_customer(customer, whole_pet)
     #delete pet from shop
-      shop_name[:pets].delete(whole_pet)
+      remove_pet_by_name(shop_name, whole_pet[:name])
     #update number of pets sold
       shop_name[:admin][:pets_sold] += 1
     end
