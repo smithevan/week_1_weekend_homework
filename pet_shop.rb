@@ -27,9 +27,6 @@ def pets_by_breed(names, breed)
   pets_of_particuar_breed = []
   for name in names[:pets]
     pets_of_particuar_breed.push(name) if name[:breed] == breed
-    # if name[:breed] == breed
-    #   pets_of_particular_breed.push(name)
-    # end
   end
   return pets_of_particuar_breed
 end
@@ -77,15 +74,20 @@ end
 
 def sell_pet_to_customer (shop_name, whole_pet, customer)
 
-
   if whole_pet == nil
     return nil
   else
+    #check customer has cash
     if customer[:cash] >= whole_pet[:price]
+    #subtract price of pet from customer's cash
       customer[:cash] -= whole_pet[:price]
+    #increase total cash amount for shop to reflect sale
       shop_name[:admin][:total_cash] += whole_pet[:price]
-      customer[:pets].push(1)
+    #add pet to customer's tally
+      customer[:pets].push(whole_pet[:name])
+    #delete pet from shop
       shop_name[:pets].delete(whole_pet)
+    #update number of pets sold
       shop_name[:admin][:pets_sold] += 1
     end
   end
