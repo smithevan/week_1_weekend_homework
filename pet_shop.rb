@@ -15,7 +15,7 @@ def pets_sold(shop_name)
 end
 
 def increase_pets_sold(shop_name, new_pets_sold)
-  return shop_name[:admin][:pets_sold] += new_pets_sold
+   return shop_name[:admin][:pets_sold] += new_pets_sold
 end
 
 def stock_count(pet_name)
@@ -72,23 +72,15 @@ def customer_can_afford_pet(customer, new_pet)
 end
 
 def sell_pet_to_customer (shop_name, whole_pet, customer)
-
   if whole_pet == nil
     return nil
   else
-    #check customer has cash
     if customer_can_afford_pet(customer, whole_pet)
-    #subtract price of pet from customer's cash
       remove_customer_cash(customer, whole_pet[:price])
-    #increase total cash amount for shop to reflect sale
       add_or_remove_cash(shop_name, whole_pet[:price])
-    #add pet to customer's tally
       add_pet_to_customer(customer, whole_pet)
-    #delete pet from shop
       remove_pet_by_name(shop_name, whole_pet[:name])
-    #update number of pets sold
       increase_pets_sold(shop_name, 1)
     end
   end
-
 end
